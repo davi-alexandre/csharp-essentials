@@ -1,0 +1,5 @@
+﻿	Because the compiler takes the yield return statement and generates
+classes that correspond to what you probably would have written manually,
+iterators in C# exhibit the same performance characteristics as classes that
+implement the enumerator design pattern manually. Although there is NO PERFORMANCE
+IMPROVEMENT, the gains in programmer PRODUCTIVITY are significant

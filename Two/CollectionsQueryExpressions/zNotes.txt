@@ -1,0 +1,107 @@
+﻿Query expressions provide straightforward syntaxes  
+    for filtering and projection.
+
+
+
+
+
+			IEnumerable<string> selection =
+					from word in KeywordCollection
+					where !word.Contains('*')
+					select word;
+
+Query expressions always begin with a “from clause” and end with a 
+	“select clause” or a “group clause,” identified by the from, 
+	select, or group contextual keyword, respectively. 
+
+The identifier word in the from clause is called a range variable; it
+	represents each item in the collection, much as the loop variable
+	in a foreach loop represents each item in a collection.
+
+
+
+Queries written using query expression notation exhibit DEFERRED EXECUTION
+The creation of the query and the assignment to the variable do not execute 
+	the query; rather, they simply build an object that represents the query. 
+
+The method word.Contains("*") is not called when the query object is created.
+	Rather, the query expression saves the selection criteria to be used when 
+	iterating over the collection identified by the selection variable.
+
+ASSINING THE RESULT OF QUERY EXPRESSIONS TO A COLLECTION MAKES IT BEHAVE BOTH AS A QUERY AND A COLLECTION
+It is as though at the time of assignment, selection would more appropriately be called “query.”
+Once we call Count(), however, a term such as selection or items 
+	that indicates a container or collection is appropriate because 
+	we begin to count the items within the collection. 
+In other words, the variable selection serves a dual purpose of
+	saving the query information and acting like a container 
+	from which the data is retrieved
+
+
+
+
+			var selection =
+					from word in KeywordCollection
+					where !word.Contains('*')
+					select new
+					{
+						Identifier = word,
+						Length = word.Length
+					};
+
+		<!-- SELECT CLAUSE WITH ANONYMOUS TYPES -->
+Horizontal projection that filters down the amount of data associated 
+	with each item in the collection is extremely powerful when the amount 
+	of data is significant and retrieving it (perhaps from a different 
+	computer over the Internet) is expensive. 
+
+Rather than retrieving all the data when a query executes, the use of 
+	anonymous types enables the capability of storing and retrieving 
+	only the required data into the collection.
+				If there were no anonymous types, developers would be
+				required either to use objects containing unnecessary
+				information or to define small, specialized classes 
+				useful only for storing the specific data required
+
+				Instead, anonymous types enable support for types to be
+				defined by the compiler—types that contain only the data
+				needed for their immediate scenario.
+				Other scenarios can have a different projection of only
+				the properties needed for that scenario.
+
+
+
+
+		<!-- QUERY CONTINUATION CLAUSE (into) -->
+It is not necessary to write an entirely new query expression
+	when you want to use the results of one query as the input
+	to another. You can extend any query with a query continuation 
+	clause using the contextual keyword into.
+A query continuation is nothing more than syntactic sugar for
+	creating two queries and using the first as the input to the second. 
+
+The range variable introduced by the into clause  becomes the
+	range variable for the remainder of the query; any previous
+	range variables are logically a part of the earlier query
+	and cannot be used in the query continuation.
+
+
+
+
+
+
+The C# compiler simply translates query expressions into a series of method calls
+The lambda expression is then itself translated by the compiler to emit a method
+	with the body of the lambda, and the usage of it becomes allocation of a
+	delegate to that method
+
+For those queries that do have both a method call form and a query expression form,
+	which is better? This is a judgment call; some queries are better suited for
+	query expressions, whereas others are more readable as method invocations.
+							
+							GUIDELINES
+DO use query expression syntax to make queries easier to read, particularly if they
+	involve complex from, let, join, or group clauses.
+CONSIDER using the standard query operators (method call form) if the query involves
+	operations that do not have a query expression syntax, 
+	such as Count(), TakeWhile(), or Distinct().

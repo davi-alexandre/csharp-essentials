@@ -1,0 +1,16 @@
+﻿	An indexer is declared much as a property is declared, except that instead
+of the name of the property, you use the keyword this followed by
+a parameter list in square brackets.
+	The body is also like a property, with get and set blocks. 
+	The parameter does not have to be integers. In fact, the index can take
+multiple parameters and can even be overloaded.
+
+
+	The CIL code from an index operator is a special property called Item
+that takes an argument.
+	Any additional member with the identifier Item, even if it has an entirely
+different signature, will conflict with the compiler-created member, so it will
+not be allowed.
+	However, using the IndexerNameAttibute, you can specify a different name.
+[System.Runtime.CompilerServices.IndexerName("Entry")]
+

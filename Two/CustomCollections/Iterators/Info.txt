@@ -1,0 +1,60 @@
+﻿	Iterators provide clean syntax for specifying how to iterate over data
+in collection classes, especially using the foreach loop.
+	The iterator allows end users of a collection to navigate its internal
+structure without knowledge of that structure.
+
+	If classes want to support iteration using the foreach loop construct,
+they must implement the enumerator pattern. In C# the foreach loop construct
+is expanded by the compiler into the while loop construct based on the IEnumerator<T>
+interface that is retrieved from the IEnumerable<T> interface.
+
+When the C# compiler encounters an iterator, it expands its contents into CIL
+code that implements the enumerator pattern. As such, there are no runtime
+dependencies for implementing iterators. Because of that, there is no real runtime
+performance benefit to using iterators. However, there is a substantial programmer
+PRODUCTIVITY gain in choosing iterators over manual implementation
+of the enumerator pattern.
+
+
+
+	To correctly implement the iterator pattern, you need to maintain some
+internal state to keep track of where you are while enumerating the collection.
+	Iterators are transformed by the compiler into a “state machine” that keeps
+track of the current position and knows how to “move itself” to the next position.
+
+	The yield return statement yields a value each time an iterator encounters
+it; control immediately returns to the caller that requested the
+item. When the caller requests the next item, the code begins to execute
+immediately following the previously executed yield return statement.
+
+
+
+----------- T H E  D A N G E R S  O F  R E C U R S I V E  I T E R A T O R S ----------
+CONSIDER using nonrecursive algorithms when iterating over potentially
+deep data structures.
+
+
+
+
+----------------- Y I E L D  S T A T E M E N T  R E Q U I R E M E N T S ------------------
+	You can use the yield return statement only in members that return an IEnumerator<T>
+or IEnumerable<T> types.
+
+	Members whose bodies include a yield return statement may not
+have a simple return. If the member uses the yield return statement,
+the C# compiler generates the necessary code to maintain the state of the
+iterator.
+In contrast, if the member uses the return statement instead of
+yield return, the programmer is responsible for maintaining his own
+state machine and returning an instance of one of the iterator interfaces.
+
+ • The yield statement may appear only inside a method, a user-defined
+operator, or the get accessor of an indexer or property. The member
+must not take any ref or out parameter.
+ • The yield statement may not appear anywhere inside an anonymous
+method or lambda expression.
+ • The yield statement may not appear inside the catch and finally
+clauses of the try statement. Furthermore, a yield statement may appear
+in a try block only if there is no catch block.
+
+

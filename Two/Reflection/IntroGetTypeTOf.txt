@@ -1,0 +1,50 @@
+﻿	REFLECTION is the process of examining the metadata within an assembly.
+Traditionally, when code compiles down to a machine language, all the metadata
+(such as type and method names) about the code is discarded.
+	In contrast, when C# compiles into the CIL, it maintains most of the metadata
+about the code. Furthermore, using reflection, it is possible to enumerate through
+all the types within an assembly and search for those that match certain criteria.
+You access a type’s metadata through instances of System.Type, and this object
+includes methods for enumerating the type INSTANCE’s MEMBERS. Additionally, it is
+possible to invoke those members on particular objects that are of the examined type.
+
+
+
+------------------- ACCESSING METADATA USING System.Type ----------------------
+	The key to reading a type’s metadata is to obtain an instance of System.Type
+that represents the target type instance. System.Type provides all the methods
+for retrieving the information about a type. You can use it to answer questions
+such as the following:
+	• What is the type’s name ( Type.Name )?
+	• Is the type public ( Type.IsPublic )?
+	• What is the type’s base type ( Type.BaseType )?
+	• Does the type support any interfaces ( Type.GetInterfaces() )?
+	• Which assembly is the type defined in ( Type.Assembly )?
+	• What are a type’s properties, methods, fields, and so on 
+		(Type.GetProperties(), Type.GetMethods(), Type.GetFields(), and so on)?
+	• Which attributes decorate a type (Type.GetCustomAttributes())?
+
+	There are more such members, but all of them provide information about a
+particular type. The key is to obtain a reference to a type’s Type object, and
+the two primary ways to do so are through:
+	• object.GetType()
+	• typeof()
+
+Note that the GetMethods() call does not return extension methods. These
+methods are available only as static members on the implementing type.
+
+
+----------------------------------- GetType() -----------------------------------
+	object includes a GetType() member and, therefore, all types include this
+function. You call GetType() to retrieve an instance of System.Type corresponding
+to the original object.
+	The key to calling GetType() is that you MUST HAVE AN OBJECT INSTANCE. However,
+sometimes no such instance is available. Static classes, for example, cannot be
+instantiated, so there is no way to call GetType().
+
+
+------------------------------------ typeof() ------------------------------------
+	The typeof expression is resolved at COMPILE TIME such that a type comparison—
+perhaps comparing the type returned from a call to GetType()—can
+determine if an object is of a specific type.
+	•  if(obj.GetType() != typeof(Contact)) { ... }

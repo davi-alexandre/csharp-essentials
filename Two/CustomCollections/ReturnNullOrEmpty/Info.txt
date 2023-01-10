@@ -1,0 +1,18 @@
+﻿	Do return a collection instance with no items. In so doing, you avoid forcing the
+caller to check for null before iterating over the items in the collection.
+			For example, given a zero-size IEnumerable<T> collection, the caller can
+		immediately and safely use a foreach loop over the collection without concern
+		that the generated call to GetEnumerator() will throw a NullReferenceException.
+			Consider using the Enumerable.Empty<T>() method to easily generate an
+		empty collection of a given type.
+
+	One of the few times to deviate from this guideline is when null is intentionally
+indicating something DIFFERENT from zero items.
+			For example, a collection of user names for a website might be null to
+		indicate that an up-to-date collection could not be obtained for some reason;
+		that is semantically different from an empty collection.
+
+
+------------------------------ G U I D E L I N E S -----------------------------------
+ - DO NOT represent an empty collection with a null reference.
+ - CONSIDER using the Enumerable.Empty<T>() method instead.

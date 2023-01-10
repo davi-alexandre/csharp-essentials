@@ -1,0 +1,42 @@
+﻿	List<T>.Sort() method sorts the elements of the list into alphabetical order
+	The string type implements the IComparable<string> interface, which has
+one method, CompareTo().
+
+	If the element type implements the generic IComparable<T> interface
+the sorting algorithm will, by default, use it to determine the sorted order.
+
+
+	For custom comparisons, IList<T>.Sort() has an overload that takes in
+an IComparer<T> as an argument
+	The difference between IComparable<T> and IComparer<T> is subtle but
+important. The first interface means, “I know how to compare myself 
+to another instance of my type.” The latter means, “I know how to
+compare two things of a given type.”
+
+
+	The IComparer<T> interface is typically used when there are many different
+possible ways of sorting a data type and none is obviously the best.
+		For example, you might have a collection of Contact objects that you sometimes
+		want to sort by name, by location, by birthday, by geographic region, or by
+		any number of other possibilities
+
+
+
+
+
+
+					S E A R C H I N G
+	To search List<T> for a particular element, you use the Contains(),
+IndexOf(), LastIndexOf(), and BinarySearch() methods. 
+	The first three methods search through the array, starting at the first element
+	(or the last element for LastIndexOf()), and examine each element until the desired
+one is found. 
+<< The execution time for these algorithms is proportional to the number of elements searched before a hit occurs. >>
+
+	BinarySearch() uses a much FASTER binary search algorithm but requires
+that the elements be SORTED. A useful feature of the BinarySearch() method
+is that if the element is not found, a negative integer is returned.
+	The bitwise complement (~) of this value is the index of the next element larger 
+than the element being sought, or the total element count if there is no greater value.
+	This provides a convenient means to insert new values into the list at the
+specific location so as to maintain sorting

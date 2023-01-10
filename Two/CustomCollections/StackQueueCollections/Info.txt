@@ -1,0 +1,24 @@
+﻿	Queue collection classes, shown in Figure 16.6, are identical to stack collection
+classes, except that they follow the ordering pattern of “first in, first
+out” (FIFO).
+	In place of the Pop() and Push() methods are the Enqueue()
+and Dequeue() methods
+
+	As with stack collection classes, the objects do not have to be unique
+
+	As a queue shrinks, it does not necessarily reclaim the storage space
+previously used, because that would make inserting a new element potentially 
+more expensive.
+	If you happen to know that a queue will remain the same size for a long
+time, however, you can hint to it that you would like to reclaim storage
+space by using the TrimToSize() method
+
+
+
+
+--------------------------- L I N K E D   L I S T S ----------------------------------------
+System.Collections.Generic also supports a linked list collection that
+enables both forward and reverse traversal
+
+Access to elements:		time ~ nº of elements
+Insertion		  :		time ~ nº of iterations (no element shifting, like in arrays)

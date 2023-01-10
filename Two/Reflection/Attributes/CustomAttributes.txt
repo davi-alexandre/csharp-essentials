@@ -1,0 +1,4 @@
+﻿Attributes are objects; therefore, to define an attribute, you need to define a class.
+The characteristic that turns a general class into an attribute is that IT DERIVES FROM
+	System.Attribute
+

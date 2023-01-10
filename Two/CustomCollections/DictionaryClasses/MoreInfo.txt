@@ -1,0 +1,65 @@
+﻿	The Dictionary<TKey, TValue> is implemented as a “hash table”; 
+this data structure provides extremely fast access when searching by key, 
+regardless of the number of values stored in the dictionary. 
+	
+	By contrast, CHECKING whether there is a particular VALUE in the dictionary
+collections is a TIMECONSUMING operation with linear performance characteristics,
+much like searching an unsorted list. 
+		To do this you use the ContainsValue() method, which searches sequentially
+		through each element in the collection.
+
+
+Implementations of dictionaries will often enumerate the keys and values
+in the order in which they were added to the dictionary, but this feature is
+neither required nor documented, so you should not rely on it.
+
+
+
+
+
+The data type returned from the Keys and Values properties is of type ICollection<T>.
+The data returned by these properties is a REFERENCE to the data within the
+original dictionary collection, rather than a copy; changes within the dictionary
+are automatically reflected in the collection returned by the Keys and
+Values properties.
+
+
+
+
+
+------------------------- E Q U A L   K E Y   C O M P A R I S O N ----------------------
+	To determine whether a given key matches any existing key in the dictionary,
+the dictionary must be able to compare two keys for equality.
+	By default, two instances of a value type are compared by checking whether
+they contain exactly the same data, and two instances of a reference type are
+compared to see whether both reference the same object (are reference equals/identical)
+	
+	Suppose you wish to create a Dictionary<Contact, string> using the Contact type.
+However, you want any two Contact objects to compare as equal if they have the same
+first and last names, regardless of whether the two objects are reference equal. 
+	Much as you can provide2 an implementation of IComparer<T> to sort a list,
+so you can similarly provide an implementation of IEqualityComparer<T> to
+determine if two keys are to be considered equal.
+	This interface requires two methods: one that returns whether two items are equal,
+and one that returns a “hash code” that the dictionary can use to facilitate fast indexing.
+
+>> RULES ON IMPLEMENTING GETHASHCODE()
+	• Equal objects must have equal hash codes.
+	• The hash code of an object should not change for the life of the instance 
+		(at least while it is in the hash table).
+	• The hashing algorithm should quickly produce a well-distributed hash.
+	• The hashing algorithm should avoid throwing exceptions in all possible object states.
+
+	EQUAL objects must have the same hashcode (although two UNEQUAL items MAY 
+have the same hash code)
+	The second most important requirement is that two calls to GetHashCode()
+on the same item must produce the same result for at least as long as the item 
+is in the hash table. BUT, do not persist hash codes into a database and expect
+them to remain stable across different runs of a program.
+	Ideally, the result of GetHashCode() should appear to be “random.” That
+is, small changes to the input should cause large changes to the output, and
+the result should be distributed roughly evenly across all possible integer
+values. It is difficult, however, to devise a hash algorithm that is extremely
+fast and produces extremely well-distributed output; try to find a good middle
+ground.
+	Finally, GetHashCode() and Equals() must not throw exceptions.

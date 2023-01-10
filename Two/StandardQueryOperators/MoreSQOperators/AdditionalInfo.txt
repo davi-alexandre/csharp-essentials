@@ -1,0 +1,2 @@
+﻿TakeWhile<T>(Func<T, bool> predicate), which repeatedly
+returns items from the collection as long as the predicate returns true

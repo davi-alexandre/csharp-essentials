@@ -1,0 +1,12 @@
+﻿The sorted collection classes store their elements sorted 
+	- by KEY for SortedDictionary<TKey, TValue>
+	- by VALUE for SortedList<T>
+
+	Because sorted collections must do extra work to maintain the sorted
+order of their elements, insertion and removal are typically SLIGHTLY SLOWER
+than insertion and removal of values in an UNORDERED dictionary
+	Because sorted collections must store their items in a particular order,
+IT IS POSSIBLE TO ACCESS VALUES BOTH BY KEY AND BY INDEX.
+	To access a key or value by its index in the sorted list, use the Keys and Values properties.
+They return IList<TKey> and IList<TValue> instances, respectively; the resultant collection can
+be indexed like any other list.

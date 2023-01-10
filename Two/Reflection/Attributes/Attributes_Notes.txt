@@ -1,0 +1,25 @@
+﻿	In the DinamicallyInvokeMembers.CommandLineHandler example, you
+dynamically set a class’s properties based on the command-line option
+matching the property name.
+	This approach is insufficient, however, when the command-line option
+is an invalid property name. ( /?, for example, cannot be supported ).
+	Furthermore, this mechanism doesn’t provide any way of identifying
+which options are required versus which are optional.
+
+	Instead of relying on an exact match between the option name and the
+property name, attributes provide a way of identifying additional metadata
+about the decorated construct — in this case, the option that the attribute
+decorates. With attributes, you can decorate a property as Required and
+provide a /? option alias. 
+	In other words, ATTRIBUTES ARE A MEANS OF ASSOCIATING ADDITIONAL DATA
+WITH A PROPERTY (and other constructs).
+
+	The idea is that from within the DinamicallyInvokeMembers.CommandLineHandler.TryParse()
+method, you enable support for option aliases
+
+In addition to decorating properties, developers can use attributes to
+decorate classes, interfaces, structs, enums, delegates, events, methods, constructors,
+fields, parameters, return values, assemblies, type parameters,
+and modules
+	The standard syntax for applying attributes doesn’t work for
+return values, assemblies, and modules.

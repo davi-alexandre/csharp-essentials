@@ -1,0 +1,25 @@
+﻿Similar to assembly, identifying an attribute usage
+as module requires prefixing it with module:. 
+
+The restriction on assembly and module attributes is
+that they must appear after the using directive but
+before any namespace or class declarations.
+
+In addition to assembly: and return:, C# allows for explicit target identifications
+of module:, class:, and method:, corresponding to attributes that
+decorate the module, class, and method, respectively. class: and method:,
+however, are optional, as demonstrated earlier.
+
+
+------------------------------ G U I D E L I N E S ---------------------------------
+ • DO apply AssemblyVersionAttribute to assemblies with public types.
+ • CONSIDER applying the following to provide additional information about the assembly.
+	- AssemblyFileVersionAttribute
+	- AssemblyCopyrightAttribute
+ • DO apply the following information assembly attributes:
+	System.Reflection.AssemblyTitleAttribute,
+	System.Reflection.AssemblyCompanyAttribute,
+	System.Reflection.AssemblyProductAttribute,
+	System.Reflection.AssemblyDescriptionAttribute,
+	System.Reflection.AssemblyFileVersionAttribute, and
+	System.Reflection.AssemblyCopyrightAttribute

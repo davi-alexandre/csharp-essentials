@@ -1,0 +1,14 @@
+﻿An INNER JOIN is the result of an AND operation between the collections
+There's also LEFT and RIGHT OUTER JOINS.
+A FULL OUTER JOIN includes everything that is not the inner join
+
+MANY-TO-MANY RELATIONSHIP
+	The elements of both collections can be linked 
+		to one or more elements of the other collection
+
+ONE-TO-MANY RELATIONSHIP
+	Only one collection can have elements linked to many
+		elements of the other collection
+	The elements of the single-link collection are normalized 
+		if their count equals the linking collection count,
+		because each single-link element appears only once
